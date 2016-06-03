@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load material_form %}
+{% load i18n %}
+{% block content %}
+    <div class="android-more-section">
+        <div class="android-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+                <div class="mdl-card__title">
+                    <h4 class="mdl-card__title-text">{% trans "Login" %}</h4>
+                </div>
+                <div class="mdl-card__supporting-text">
+                <form method="POST" class="viewform">{% csrf_token %}
+                {% form %}
+                    {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+                    {% part form.password prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
+                {% endform %}
+                <button type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Submit" %} </button>
+                </form>
+                </div>
+                <div class="mdl-card__actions">
+                    <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url "signup" %}">
+                        {% trans "Create Account" %}
+                        <i class="material-icons">chevron_right</i>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- end android-card-container -->
+    </div><!-- end android-more-section -->
+{% endblock %}

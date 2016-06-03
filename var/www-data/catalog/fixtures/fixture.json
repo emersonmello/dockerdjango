@@ -1,0 +1,134 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "cats & dogs",
+    "slug": "cats-dogs",
+    "description": "cats and dogs",
+    "is_active": true,
+    "meta_keywords": "fluffy cat, fluffy dog",
+    "meta_description": "Fluffy cats & dogs",
+    "created_at": "2016-05-28T18:50:54.151Z",
+    "updated_at": "2016-05-28T18:50:54.151Z"
+  }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Teddy Bear",
+        "slug": "teddy-bear",
+        "description": "fluffy teddy bear",
+        "meta_keywords": "fluffy teddy bear",
+        "meta_description": "fluffy teddy bear",
+        "created_at": "2016-05-28T18:50:54.151Z",
+        "updated_at": "2016-05-28T18:50:54.151Z",
+        "is_active": true
+    }
+},
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "name": "puppy",
+    "slug": "puppy",
+    "brand": "encante.se",
+    "sku": "0102030405",
+    "brand": "encante.se",
+    "price": "10.00",
+    "old_price": "0.00",
+    "image": "product_images/puppy_xd33HK6.jpg",
+    "is_active": true,
+    "is_bestseller": false,
+    "is_featured": false,
+    "stock": 10,
+    "description": "puppy",
+    "meta_keywords": "fluffy cat, fluffy dog",
+    "meta_description": "Fluffy cats & dogs",
+    "created_at": "2016-05-28T18:52:07.809Z",
+    "updated_at": "2016-05-28T18:52:07.809Z",
+    "categories": [
+      1
+    ]
+  }
+},
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Mrs. Scotty",
+        "slug": "mrs-scotty",
+        "brand": "encante.se",
+        "description": "fluffy scotty",
+        "meta_keywords": "fluffy scotty",
+        "meta_description": "fluffy scotty",
+        "stock": 10,
+        "is_active": true,
+        "is_bestseller": false,
+        "is_featured": false,
+        "sku": "0102030406",
+        "description": "fluffy scotty",
+        "categories": [2],
+        "image": "product_images/mrs-scotty.jpg",
+        "price": 10.00,
+        "created_at": "2016-05-28T18:52:07.809Z",
+        "updated_at": "2016-05-28T18:52:07.809Z",
+        "categories": [
+          1
+        ]
+    }
+  },
+    {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Teddy Bear",
+        "slug": "teddy-bear",
+        "brand": "encante.se",
+        "description": "fluffy teddy bear",
+        "meta_keywords": "fluffy teddy bear",
+        "meta_description": "fluffy teddy bear",
+        "stock": 10,
+        "is_active": true,
+        "is_bestseller": false,
+        "is_featured": false,
+        "sku": "0102030406",
+        "description": "fluffy teddy bear",
+        "categories": [2],
+        "image": "product_images/teddy-bear.jpg",
+        "price": 10.00,
+        "created_at": "2016-05-28T18:52:07.809Z",
+        "updated_at": "2016-05-28T18:52:07.809Z",
+        "categories": [
+          2
+        ]
+    }
+  },
+     {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Grey pusheen",
+        "slug": "grey-pusheen",
+        "brand": "encante.se",
+        "description": "fluffy grey pusheen",
+        "meta_keywords": "fluffy grey pusheen",
+        "meta_description": "fluffy grey pusheen",
+        "stock": 10,
+        "is_active": true,
+        "is_bestseller": false,
+        "is_featured": false,
+        "sku": "0102030406",
+        "description": "fluffy grey pusheen",
+        "categories": [2],
+        "image": "product_images/pusheen.jpg",
+        "price": 10.00,
+        "created_at": "2016-05-28T18:52:07.809Z",
+        "updated_at": "2016-05-28T18:52:07.809Z",
+        "categories": [
+          1
+        ]
+    }
+  }
+]

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="android-more-section">
+    <div class="android-card-container mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+            <table class="mdl-data-table mdl-js-data-table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Item" %}</th>
+                        <th>{% trans "Quantity" %}</th>
+                        <th>{% trans "Unit price" %}</th>
+                        <th>{% trans "Unit price" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in basket_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.total }}</td>
+                        <td><a href="{% url "remove_from_basket" item.pk %}"><i class="material-icons md-icon">clear</i></a></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{% trans "Subtotal" %} </td>
+                    <td>{{ basket.total }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Checkout" %} </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

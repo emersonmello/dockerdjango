@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load i18n %}
+{% block content %}
+<div class="mdl-grid portfolio-max-width">
+    <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">{{ product.name }}</h2>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            {% thumbnail product.image "100x100" crop="center" as im %}
+                <img class="article-image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+        </div>
+        <div class="mdl-cell mdl-cell--12-col mdl-typography--headline">
+            <span>{{ product.description }}</span>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col mdl-card__supporting-text no-padding ">
+            <p>{% trans "Price:" %} {{ product.price }}</p>
+            <p>{% trans "Brand:" %} {{ product.brand }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

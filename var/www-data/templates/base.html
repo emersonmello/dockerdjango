@@ -1,0 +1,180 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load thumbnail %}
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Introducing Lollipop, a sweet new take on Android.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>{% trans "SP Commerce" %}</title>
+    <link rel="stylesheet" href="{% static "material.min.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+
+    <!-- django material -->
+    {% include 'material/includes/material_css.html' %}
+    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+    {% include 'material/includes/material_js.html' %}
+    <!-- end django material -->
+
+    <style>
+        #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {% block header %}
+        <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+            <div class="mdl-layout__header-row">
+                <span class="android-title mdl-layout-title">
+                <img class="android-logo-image" src="{% static "images/android-logo.png" %}">
+                </span>
+                <!-- Add spacer, to align navigation to the right in desktop -->
+                <div class="android-header-spacer mdl-layout-spacer"></div>
+                <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                        <i class="material-icons">{% trans "search" %}</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search-field">
+                    </div>
+                </div>
+              <!-- Navigation -->
+                <div class="android-navigation-container">
+                    <nav class="android-navigation mdl-navigation">
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "home" %}">{% trans "Home" %}</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "catalog:show_catalog" %}">{% trans "Catalog" %}</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "about" %}">{% trans "About" %}</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "contact" %}">{% trans "Contact" %}</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "basket" %}">{% trans "Your Basket" %}</a>
+                        {% if request.user.is_authenticated %}
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "logout" %}">{% trans "Logout" %}</a>
+                        {% else %}
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "login" %}">{% trans "Login or register" %}</a>
+                        {% endif %}
+                    </nav>
+                </div>
+                <span class="android-mobile-title mdl-layout-title">
+                    <img class="android-logo-image" src="{% static "images/android-logo.png" %}">
+                </span>
+                <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                    <li class="mdl-menu__item">{% trans "My Account" %}</li>
+                    <li class="mdl-menu__item">{% trans "Basket" %}</li>
+                </ul>
+            </div><!-- end div mdl-layout__header-row -->
+        </div><!-- end android header -->
+
+        <div class="android-drawer mdl-layout__drawer">
+            <span class="mdl-layout-title">
+                <img class="android-logo-image" src="{% static "images/android-logo-white.png" %}">
+            </span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="{% url "home" %}">{% trans "Home" %}</a>
+                <a class="mdl-navigation__link" href="{% url "catalog:show_catalog" %}">{% trans "Catalog" %}</a>
+                <a class="mdl-navigation__link" href="{% url "about" %}">{% trans "About" %}</a>
+                <a class="mdl-navigation__link" href="{% url "contact" %}">{% trans "Contact" %}</a>
+                <a class="mdl-navigation__link" href="{% url "basket" %}">{% trans "Your Basket" %}</a>
+                {% if request.user.is_authenticated %}
+                <a class="mdl-navigation__link" href="{% url "logout" %}">{% trans "Logout" %}</a>
+                {% else %}
+                <a class="mdl-navigation__link" href="{% url "login" %}">{% trans "Login or register" %}</a>
+                {% endif %}
+            </nav>
+        </div>
+    {% endblock header %}
+        <div class="android-content mdl-layout__content">
+            <a name="top"></a>
+            {% block content %}
+            <div class="android-customized-section">
+                <div class="android-customized-section-text">
+                    <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Customised by you, for you</div>
+                    <p class="mdl-typography--font-light">
+                      Put the stuff that you care about right on your home screen: the latest news, the weather or a stream of your recent photos.
+                        <br>
+                        <a href="" class="android-link mdl-typography--font-light">Customise your phone</a>
+                    </p>
+                </div>
+            </div> <!-- end android-customized-section -->
+            <div class="android-more-section">
+                <div class="android-section-title mdl-typography--display-1-color-contrast">{% trans "Featured Products" %}</div>
+                <div class="android-card-container mdl-grid">
+                    {% for product in products %}
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+                        <div class="mdl-card__media">
+                            <img src="{{ product.image.url }}">
+                        </div>
+                        <div class="mdl-card__title">
+                            <h4 class="mdl-card__title-text">{{ product.name }}</h4>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            <span class="mdl-typography--font-light mdl-typography--subhead">{{ product.description }}</span>
+                        </div>
+                        <div class="mdl-card__actions">
+                            <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase add-basket-item" href="{% url "add_to_basket" product.pk %} ">
+                           {% trans "Add to basket" %}
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </div>
+                </div>
+                {% endfor %}
+              </div> <!-- end android-card-container -->
+            </div><!-- end android-more-section -->
+        {% endblock content %}
+        </div> <!-- end div android-content mdl-layout__content -->
+        {% block footer %}
+        <footer class="android-footer mdl-mega-footer">
+            <div class="mdl-mega-footer--top-section">
+                <div class="mdl-mega-footer--left-section">
+                    <button class="mdl-mega-footer--social-btn"></button>
+                  &nbsp;
+                    <button class="mdl-mega-footer--social-btn"></button>
+                  &nbsp;
+                    <button class="mdl-mega-footer--social-btn"></button>
+                </div>
+                <div class="mdl-mega-footer--right-section">
+                    <a class="mdl-typography--font-light" href="#top">
+                    {% trans "Back to Top" %}
+                        <i class="material-icons">{% trans "expand_less" %}</i>
+                    </a>
+                </div>
+            </div>
+       </footer>
+
+
+    {% endblock footer %}
+    </div> <!-- end div class="mdl-layout mdl-js-layout mdl-layout--fixed-header -->
+    <script src="{% static "material.min.js" %}"></script>
+    <script type="text/javascript" src="/media/js/custom.js"></script>
+</body>
+</html>
