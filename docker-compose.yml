@@ -6,8 +6,6 @@ services:
     links:
       - db
     command: ./uwsgi.sh
-#    ports:
-#      - "5000:5000"
     volumes:
       - /static
       - ./spcommerce/media:/media
