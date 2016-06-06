@@ -1,4 +1,4 @@
-# Usando docker-compose para combinar: nginx, postgresql e django
+# Usando docker-compose para combinar: postgresql, django e nginx (com uwsgi)
 
 ## Requisitos
 
@@ -10,9 +10,9 @@
 1.	git clone http://github.com/emersonmello/dockerdjango
 1.	cd dockerdjango
 1.	docker-compose up
-1.	docker-compose run web python manage.py migrate
-1.	docker-compose run web python manage.py loaddata catalog/fixtures/fixture.json
+1.	docker-compose run uwsgi python /app/manage.py migrate
+1.	docker-compose run uwsgi python /app/manage.py loaddata /app/catalog/fixtures/fixture.json
 
-Por fim, abra o navegador web e aponte para: http://localhost 
+Por fim, abra o navegador web e aponte para: http://localhost:8000
 
 

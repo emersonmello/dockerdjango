@@ -1,36 +1,30 @@
 version: '2'
 services:
 
+  uwsgi:
+    build: .
+    links:
+      - db
+    volumes:
+      - /static
+      - ./spcommerce/media:/media
+    depends_on:
+      - db
+
   db:
-    restart: always
     image: postgres:9.3
     environment:
       - POSTGRES_PASSWORD=password
     volumes:
-      - ./var/pg-data:/var/lib/postgresql/data
-
-  web:
-    restart: always
-    build: ./web
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./var/www-data:/code
-    links:
-      - db
-    depends_on:
-      - db
+      - ./data/pg-data:/var/lib/postgresql/data
 
   nginx:
-    restart: always
-    build: ./nginx
-    ports:
-      - "80:80"
-    volumes_from:
-      - web
+    build: ./nginx 
     links:
-      - web:web
+      - uwsgi
+    volumes_from:
+      - uwsgi
+    ports:
+      - "8000:80"
     depends_on:
-      - web
-
+      - uwsgi
