@@ -5,7 +5,6 @@ services:
     build: .
     links:
       - db
-    command: ./uwsgi.sh
     volumes:
       - /static
       - ./spcommerce/media:/media
