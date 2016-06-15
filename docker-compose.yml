@@ -6,7 +6,7 @@ services:
     links:
       - db
     volumes:
-      - /static
+      - ./spcommerce/static:/static
       - ./spcommerce/media:/media
     depends_on:
       - db
