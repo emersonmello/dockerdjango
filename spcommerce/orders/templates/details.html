@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="android-more-section">
+        <div class="android-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                <div class="mdl-card__title">
+                    <h4 class="mdl-card__title-text">{% trans "Your order is complete! Check your order number below" %}</h4>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <span class="mdl-typography--font-light mdl-typography--subhead">{{ order.order_id }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

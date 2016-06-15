@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block extra_header %}
+<style>
+
+.login-form-div{
+    width: 500px;
+    background: #fff;
+}
+.form-column{
+  padding: 20px 35px !important;
+}
+.cell_con{
+    background: #fff;
+    padding-left: 20px;
+}
+.cell_con div{
+    width: 87%;
+}
+.links{
+    margin: auto;
+    text-align: center;
+}
+.btn{
+  margin:auto;
+  width:100%;
+}
+.android-more-section {
+    text-align: center;
+}
+</style>
+{% endblock extra_header %}
+{% block content %}
+    <div class="android-more-section">
+        <div class="android-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                <div class="mdl-card__title">
+                    <h4 class="mdl-card__title-text">{% trans "Inform your shipping address" %}</h4>
+                </div>
+                <form method="POST" class="viewform">{% csrf_token %}
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">person_pin_circle</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_nickname" name="shipping_nickname">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping nickname" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">person_pin_circle</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_first_name" name="shipping_first_name">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping first_name" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_last_name" name="shipping_last_name">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping last_name" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_address1" name="shipping_address1">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping address1" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_address2" name="shipping_address2">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping address2" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_city" name="shipping_city">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping city" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_state" name="shipping_state">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping state" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="id_shipping_zip" name="shipping_zip">
+                        <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping zip" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col cell_con">
+                    <i class="material-icons">place</i>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <select id="id_shipping_country" name="shipping_country">
+                    {% for a,b in order_form.fields.shipping_country.choices %}
+                        <option value="{{ a }}"> {{ b }}</option>
+                    {% endfor %}
+                    </select>
+                    <label class="mdl-textfield__label" for="shipping_country">{% trans "Enter your shipping country" %}</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col  login-btn-con">
+                    <button class="btn btn-primary btn-lg">{% trans "Continue" %}</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>  {% endblock content %}

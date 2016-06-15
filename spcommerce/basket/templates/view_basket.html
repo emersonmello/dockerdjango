@@ -35,7 +35,13 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><button type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Checkout" %} </button></td>
+                    <td>
+                    <form action="{% url "checkout" %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="shipping" value="true">
+                        <button id="checkout" type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Checkout" %} </button>
+                    </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

@@ -63,6 +63,8 @@ def login_view(request):
 def logged_out(request):
 	"""Logs user out using provided logout function from django.contrib.auth"""
 
+	clean_session(request)
+
 	if request.user.is_anonymous():
 		return HttpResponseRedirect(reverse('home'))
 
@@ -83,6 +85,15 @@ def view_profile(request):
 	user = request.user
 	profile = Profile.objects.get(user=user)
 
-	return render(request, 'accounts/profile.html', {
+	return render(request, 'profile.html', {
 		'profile': profile,
 	})
+
+def clean_session(request):
+    if request.session.has_key('carry_over_basket'):
+        del request.session['carry_over_basket']
+    if request.session.has_key('anon_basket_id'):
+        del request.session['anon_basket_id']
+    if request.session.has_key('order'):
+        del request.session['order']
+

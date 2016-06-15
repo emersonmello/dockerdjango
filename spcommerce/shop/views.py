@@ -1,10 +1,13 @@
 from django.shortcuts import render
 
 from catalog.models import Product
+from basket.models import Basket
 
 def home(request):
     products = Product.objects.all()
-    return render(request, "base.html", {'products': products})
+    return render(request, "base.html", {
+        'products': products,
+    })
 
 def contact(request):
     return render(request, "contact.html")

@@ -1,6 +1,5 @@
 {% load staticfiles %}
 {% load i18n %}
-{% load thumbnail %}
 <!doctype html>
 <!--
   Material Design Lite
@@ -47,6 +46,7 @@
           z-index: 900;
         }
     </style>
+    {% block extra_header %}{% endblock extra_header %}
 </head>
 
 <body>
@@ -74,7 +74,7 @@
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "catalog:show_catalog" %}">{% trans "Catalog" %}</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "about" %}">{% trans "About" %}</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "contact" %}">{% trans "Contact" %}</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "basket" %}">{% trans "Your Basket" %}</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "basket" %}">{% trans "Your Basket" %} ({{ basket.size }})</a>
                         {% if request.user.is_authenticated %}
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{% url "logout" %}">{% trans "Logout" %}</a>
                         {% else %}
@@ -90,7 +90,7 @@
                 </button>
                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
                     <li class="mdl-menu__item">{% trans "My Account" %}</li>
-                    <li class="mdl-menu__item">{% trans "Basket" %}</li>
+                    <li class="mdl-menu__item">{% trans "Basket" %} ({{ basket.size }})</li>
                 </ul>
             </div><!-- end div mdl-layout__header-row -->
         </div><!-- end android header -->
@@ -104,7 +104,7 @@
                 <a class="mdl-navigation__link" href="{% url "catalog:show_catalog" %}">{% trans "Catalog" %}</a>
                 <a class="mdl-navigation__link" href="{% url "about" %}">{% trans "About" %}</a>
                 <a class="mdl-navigation__link" href="{% url "contact" %}">{% trans "Contact" %}</a>
-                <a class="mdl-navigation__link" href="{% url "basket" %}">{% trans "Your Basket" %}</a>
+                <a class="mdl-navigation__link" href="{% url "basket" %}">{% trans "Your Basket" %} ({{ basket.size }})</a>
                 {% if request.user.is_authenticated %}
                 <a class="mdl-navigation__link" href="{% url "logout" %}">{% trans "Logout" %}</a>
                 {% else %}

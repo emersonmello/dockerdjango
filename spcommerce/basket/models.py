@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.http import Http404
 
 from catalog.models import Product, Category
 
@@ -58,7 +59,6 @@ class Basket(models.Model):
             price = product.get_price()
             basketitem.price = price
             basketitem.quantity += quantity
-            basketitem.total = price * quantity
             basketitem.save()
             self.save()
 
@@ -68,6 +68,7 @@ class Basket(models.Model):
             new_quantity = basketitem.quantity + quantity
             basketitem.quantity = new_quantity
             basketitem.save()
+            self.save()
 
         return basketitem
 
