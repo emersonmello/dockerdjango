@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'material',
     'material.frontend',
     'material.admin',
-    'sorl.thumbnail',
     'django_countries',
 
     'catalog',
