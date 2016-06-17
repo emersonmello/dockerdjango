@@ -1,164 +1,115 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load staticfiles %}
 {% block extra_header %}
-<style>
-
-.form-column{
-  padding: 20px 35px !important;
-}
-.cell_con{
-    background: #fff;
-    padding-left: 20px;
-}
-.cell_con div{
-    width: 87%;
-}
-.links{
-    margin: auto;
-    text-align: center;
-}
-.btn{
-  margin:auto;
-  width:100%;
-}
-.android-more-section {
-    text-align: center;
-}
-</style>
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 {% endblock extra_header %}
 {% block content %}
     <div class="android-more-section">
         <div class="android-card-container mdl-grid">
             <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
-                    <h4 class="mdl-card__title-text">{% trans "Inform your billing address" %}</h4>
-                </div>
-                <form method="POST" class="viewform">{% csrf_token %}
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <select name="brand">
+                <div class="container">
+                    <h4>{% trans "Inform your billing address" %}</h4>
+                    <form method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <label for="card_id" class="col-sm-2 control-label">{% trans "Card id" %}{% if payment_form.fields.card_id.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" id="card_id" name="card_id" placeholder="{% trans "Card Number" %}" value="{{ payment_form.card_id.value|default:"" }}">
+                          {% if payment_form.card_id.errors %}<span class="has-error">{{ payment_form.card_id.errors.as_text }}</span>{% endif %}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="payment_exp_month" class="col-sm-2 control-label">{% trans "Card Exp Month" %}{% if payment_form.fields.exp_month.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                          <input type="text" size="2" class="form-control" id="payment_exp_month" name="exp_month" placeholder="{% trans "Card exp month" %}" value="{{ payment_form.payment_exp_month.value|default:"" }}">
+                            {% if payment_form.exp_month.errors %}<span class="has-error">{{ payment_form.exp_month.errors.as_text }}</span>{% endif %}
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label for="payment_exp_year" class="col-sm-2 control-label">{% trans "Card exp year" %}{% if payment_form.fields.exp_year.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" size="2" class="form-control" id="payment_exp_year" name="exp_year" placeholder="{% trans "Card exp year" %}" value="{{ payment_form.payment_exp_year.value|default:"" }}">
+                            {% if payment_form.exp_year.errors %}<span class="has-error">{{ payment_form.exp_year.errors.as_text }}</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cc_four" class="col-sm-2 control-label">{% trans "Card security code" %}{% if payment_form.fields.cc_four.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="cc_four" name="cc_four" placeholder="{% trans "Card security code" %}" value="{{ payment_form.cc_four.value|default:"" }}">
+                            {% if payment_form.cc_four.errors %}<span class="has-error">{{ payment_form.cc_four.errors.as_text }}</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment_brand" class="col-sm-2 control-label">{% trans "Card brand" %}{% if payment_form.fields.brand.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <select name="brand" class-"form-control">
                             <option value="---"></option>
-                                <option value="VISA">VISA</option>
-                                <option value="MASTERCARD">MASTERCARD</option>
-                                <option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
-                        </select>
-                        {% if payment_form.brand.value == None %}
-                            <label class="mdl-textfield__label" for="brand">{% trans "Enter your card brand" %}</label>
-                        {% endif %}
+                                 <option value="VISA">VISA</option>
+                                 <option value="MASTERCARD">MASTERCARD</option>
+                                 <option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
+                         </select>
+                        </div>
+                        {% if payment_form.brand.errors %}<span class="has-error">{{ payment_form.brand.errors.as_text }}</span>{% endif %}
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">person_pin_circle</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_card_id" name="card_id"
-                        value="{{ payment_form.card_id.value|default:"" }}">
-                        {% if payment_form.card_id.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your card number"%}  </label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_full_name" class="col-sm-2 control-label">{% trans "Billing Full Name" %}{% if payment_form.fields.full_name.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="billing_full_name" name="full_name" placeholder="{% trans "Billing Full Name" %}" value="{{ payment_form.full_name.value|default:"" }}">
+                            {% if payment_form.full_name.errors %}<span class="has-error">{{ payment_form.full_name.errors.as_text }}</span>{% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">person_pin_circle</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_exp_month" name="exp_month"
-                        value="{{ payment_form.exp_month.value|default:"" }}">
-                        {% if payment_form.exp_month.value == None %}
-                            <label class="mdl-textfield__label" for="exp_month">{% trans "Enter your card expiration month" %}</label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_address1" class="col-sm-2 control-label">{% trans "Billing Address" %}{% if payment_form.fields.billing_address1.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="billing_address1" id="payment_address1" placeholder="{% trans "Billing Address" %}" value="{{ payment_form.payment_address1.value|default:"" }}">
+                            {% if payment_form.billing_address1.errors %}<span class="has-error">{{ payment_form.billing_address1.errors.as_text }}</span>{% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_exp_year" name="exp_year" value="{{ payment_form.exp_year.value|default:"" }}">
-                        {% if payment_form.exp_year.value == None %}
-                            <label class="mdl-textfield__label" for="exp_year">{% trans "Enter your card expiration year" %}</label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_city" class="col-sm-2 control-label">{% trans "Billing City" %}{% if payment_form.fields.billing_city.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="{% trans "Billing City" %}" value="{{ payment_form.payment_city.value|default:"" }}">
+                            {% if payment_form.billing_city.errors %}<span class="has-error">{{ payment_form.billing_city.errors.as_text }}</span>{% endif %}
+                        </div>
+
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_full_name" name="full_name">
-                        {% if payment_form.full_name.value == None %}
-                            <label class="mdl-textfield__label" for="full_name">{% trans "Enter your card full name" %}</label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_state" class="col-sm-2 control-label">{% trans "Billing State" %} {% if payment_form.fields.billing_state.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="billing_state" id="payment_state" placeholder="{% trans "Billing State" %}" value="{{ payment_form.payment_state.value|default:"" }}">
+                            {% if payment_form.billing_state.errors %}<span class="has-error">{{ payment_form.billing_state.errors.as_text }}</span>{% endif %}
+                        </div>
+
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_cc_four" name="cc_four">
-                        {% if payment_form.cc_four.value == None %}
-                            <label class="mdl-textfield__label" for="cc_four">{% trans "Enter your card security number" %}</label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_zip" class="col-sm-2 control-label">{% trans "Billing Zip Code" %}{% if payment_form.fields.billing_zip.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="billing_zip" class="form-control" id="payment_zip" placeholder="{% trans "Billing Zip Code" %}" value="{{ payment_form.payment_zip.value|default:"" }}">
+                            {% if payment_form.billing_zip.errors %}<span class="has-error">{{ payment_form.billing_zip.errors.as_text }}</span>{% endif %}
+                        </div>
+
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_billing_address1" name="billing_address1" value="{{ payment_form.billing_address1.value|default:"" }}">
-                        {% if payment_form.billing_address1.value == None %}
-                            <label class="mdl-textfield__label" for="billing_address1">{% trans "Enter your billing address1" %}</label>
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="payment_country" class="col-sm-2 control-label">{% trans "Billing Country" %} {% if payment_form.fields.billing_country.required %} *{% endif %}</label>
+                        <div class="col-sm-8">
+                            <select id="id_billing_country" class="form-control" name="billing_country">
+                                <option value=""> ---- </option>
+                                {% for a,b in payment_form.fields.billing_country.choices %}
+                                    <option value="{{ a }}"> {{ b }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if payment_form.billing_country.errors %}<span class="has-error">{{ payment_form.billing_country.errors.as_text }}</span>{% endif %}
+                        </div>
                     </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-8">
+                          <input type="hidden" name="payment" value="true">
+                          <button type="submit" class="btn btn-default">{% trans "Continue" %}</button>
+                        </div>
+                      </div>
+                    </form>
                 </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_billing_address2" name="billing_address2" value="{{ payment_form.billing_address2.value|default:"" }}">
-                        {% if payment_form.billing_address2.value == None %}
-                            <label class="mdl-textfield__label" for="billing_address2">{% trans "Enter your billing address2" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_billing_city" name="billing_city" value="{{ payment_form.billing_city.value|default:"" }}">
-                        {% if payment_form.billing_city.value == None %}
-                            <label class="mdl-textfield__label" for="billing_city">{% trans "Enter your billing city" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_billing_state" name="billing_state" value="{{ payment_form.billing_state.value|default:"" }}">
-                        {% if payment_form.billing_state.value == None %}
-                            <label class="mdl-textfield__label" for="billing_state">{% trans "Enter your billing state" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_billing_zip" name="billing_zip" value="{{ payment_form.billing_zip.value|default:"" }}">
-                        {% if payment_form.billing_zip.value == None %}
-                            <label class="mdl-textfield__label" for="billing_zip">{% trans "Enter your billing zip" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select id="id_billing_country" name="billing_country">
-                    <option value=""> ---- </option>
-                    {% for a,b in payment_form.fields.billing_country.choices %}
-                        <option value="{{ a }}"> {{ b }}</option>
-                    {% endfor %}
-                    </select>
-                    {% if payment_form.billing_country.value == None %}
-                        <label class="mdl-textfield__label" for="billing_country">{% trans "Enter your billing country" %}</label>
-                    {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col  login-btn-con">
-                    <input type="hidden" name="finalize" value="true">
-                    <button class="btn btn-primary btn-lg">{% trans "Continue" %}</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>  {% endblock content %}

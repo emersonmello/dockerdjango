@@ -68,3 +68,6 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return str(self.user)
+
+	def last_order(self):
+		return self.order_set.all().last()

@@ -10,12 +10,12 @@ class ShippingForm(forms.Form):
     shipping_nickname = forms.CharField()
     shipping_first_name = forms.CharField()
     shipping_last_name = forms.CharField()
-    shipping_phone_number = forms.CharField()
+    shipping_phone_number = forms.CharField(required=False)
     shipping_address1 = forms.CharField()
-    shipping_address2 = forms.CharField()
+    shipping_address2 = forms.CharField(required=False)
     shipping_city = forms.CharField(widget=forms.TextInput(attrs={'size': '2'}))
     shipping_state = forms.CharField()
-    shipping_zip = forms.CharField()
+    shipping_zip = forms.CharField(widget=forms.TextInput(attrs={'size': '9'}))
     shipping_country = LazyTypedChoiceField(choices=countries)
 
     def set_order_shipping(self, order_as_json):
@@ -59,8 +59,8 @@ class PaymentForm(forms.Form):
                 required=True
             )
     billing_address1 = forms.CharField()
-    billing_address2 = forms.CharField()
-    billing_city = forms.CharField()
+    billing_address2 = forms.CharField(required=False)
+    billing_city = forms.CharField(widget=forms.TextInput(attrs={'size': '2'}))
     billing_state = forms.CharField()
     billing_zip = forms.CharField()
     billing_country = LazyTypedChoiceField(choices=countries)

@@ -1,12 +1,24 @@
 from django.shortcuts import get_object_or_404, render
 
 from catalog.models import Product
+from basket.basket_utils import get_current_basket
+
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 def catalog(request):
-    products = Product.objects.all()
+    try:
+        products = Product.objects.all()
+        basket = get_current_basket(request)
+    except Exception as e:
+        logger.error('%s (%s)' % (e.message, type(e)))
+        products = []
+        basket = None
     return render(request, "catalog.html", {
         'products': products,
+        'basket': basket
     })
 
 

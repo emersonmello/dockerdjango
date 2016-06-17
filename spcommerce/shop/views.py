@@ -2,20 +2,22 @@ from django.shortcuts import render
 
 from catalog.models import Product
 from basket.models import Basket
+from basket.basket_utils import get_current_basket
+
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 def home(request):
-    products = Product.objects.all()
+    try:
+        products = Product.objects.all()
+        basket = get_current_basket(request)
+    except Exception as e:
+        logger.error('%s (%s)' % (e.message, type(e)))
+        products = []
+        basket = []
     return render(request, "base.html", {
         'products': products,
+        'basket': basket
     })
-
-def contact(request):
-    return render(request, "contact.html")
-
-
-def blog(request):
-    return render(request, "blog.html")
-
-
-def about(request):
-    return render(request, "about.html")

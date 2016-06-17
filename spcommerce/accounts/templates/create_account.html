@@ -1,30 +1,56 @@
 {% extends 'base.html' %}
-{% load material_form %}
 {% load i18n %}
+{% load staticfiles %}
+{% block extra_header %}
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+{% endblock extra_header %}
 {% block content %}
   <div class="android-more-section">
 	 <div class="android-card-container mdl-grid">
-		<div class="mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet mdl-cell--6-col-phone mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
-                    <h4 class="mdl-card__title-text">{% trans "Sign up for an account" %}</h4>
+		<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+            <div class="container">
+                <h4>{% trans "Sign up for an account" %}</h4>
+                <form method="POST" class="form-horizontal">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">{% trans "Username" %}{% if form.fields.username.required %} *{% endif %}</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="password" name="username" placeholder="{% trans "Username" %}" value="{{ form.username.value|default:"" }}">
+                            {% if form.username.errors %}<span class="has-error">{{ form.username.errors.as_text }}</span>{% endif %}
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">{% trans "E-mail" %}{% if form.fields.email.required %} *{% endif %}</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="{% trans "E-mail" %}" value="{{ form.email.value|default:"" }}">
+                            {% if form.email.errors %}<span class="has-error">{{ form.email.errors.as_text }}</span>{% endif %}
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label for="password1" class="col-sm-2 control-label">{% trans "Password" %}{% if form.fields.password1.required %} *{% endif %}</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password1" name="password1" placeholder="{% trans "Password" %}" value="{{ form.password1.value|default:"" }}">
+                            {% if form.password1.errors %}<span class="has-error">{{ form.password1.errors.as_text }}</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2" class="col-sm-2 control-label">{% trans "Repeat Password" %}{% if form.fields.password2.required %} *{% endif %}</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password2" name="password2" placeholder="{% trans "Repeat Password" %}" value="{{ form.password2value|default:"" }}">
+                            {% if form.password2.errors %}<span class="has-error">{{ form.password2.errors.as_text }}</span>{% endif %}
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" name="_submit" class="btn  btn-primary btn-default">{% trans "Submit" %} </button>
+                    </div>
                 </div>
-                <div class="mdl-card__supporting-text">
-                <form method="POST" id="signup-form" class="viewform">{% csrf_token %}
-                {% form %}
-                    {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-                    {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-                    {% part form.password1 prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
-                    {% part form.password2 prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
-
-                {% endform %}
-                <button type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Submit" %} </button>
                 </form>
-				</div>
- 				<div class="mdl-card__actions">
- 				    <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url "login" %}">
+ 				   <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url "login" %}">
                     	{% trans "Have an account already? Click here" %}
                     <i class="material-icons">chevron_right</i>
-			    </div>
+
+            </div>
 		</div> <!-- end mdl-cell -->
 	</div><!-- end android-card-container mdl-grid-->
 </div> <!-- end android more section -->
