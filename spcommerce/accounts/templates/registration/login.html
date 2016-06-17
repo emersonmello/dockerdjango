@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load material_form %}
 {% load i18n %}
 {% block content %}
     <div class="android-more-section">
@@ -10,10 +9,7 @@
                 </div>
                 <div class="mdl-card__supporting-text">
                 <form method="POST" class="viewform">{% csrf_token %}
-                {% form %}
-                    {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-                    {% part form.password prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
-                {% endform %}
+                    {{ form }}
                 <button type="submit" name="_submit" class="btn btn-primary btn-lg">{% trans "Submit" %} </button>
                 </form>
                 </div>

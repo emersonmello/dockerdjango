@@ -34,107 +34,17 @@
                     <h4 class="mdl-card__title-text">{% trans "Inform your shipping address" %}</h4>
                 </div>
                 <form method="POST" class="viewform">{% csrf_token %}
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">person_pin_circle</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_nickname" name="shipping_nickname"
-                        value="{{ shipping_form.shipping_nickname.value|default:"" }}">
-                        {% if shipping_form.shipping_nickname.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping nickname" %}</label>
+                    {% for field in shipping_form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
                         {% endif %}
                     </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">person_pin_circle</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_first_name" name="shipping_first_name"
-                        value="{{ shipping_form.shipping_first_name.value|default:"" }}">
-                        {% if shipping_form.shipping_first_name.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping first_name" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_last_name" name="shipping_last_name" value="{{ shipping_form.shipping_last_name.value|default:"" }}">
-                        {% if shipping_form.shipping_last_name.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping last_name" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_phone_number" name="shipping_phone_number">
-                        {% if shipping_form.shipping_phone_number.value == None %}
-                            <label class="mdl-textfield__label" for="shipping_phone_number">{% trans "Enter your shipping phone number" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_address1" name="shipping_address1" value="{{ shipping_form.shipping_address1.value|default:"" }}">
-                        {% if shipping_form.shipping_address1.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping address1" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_address2" name="shipping_address2" value="{{ shipping_form.shipping_address2.value|default:"" }}">
-                        {% if shipping_form.shipping_address2.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping address2" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_city" name="shipping_city" value="{{ shipping_form.shipping_city.value|default:"" }}">
-                        {% if shipping_form.shipping_city.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping city" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_state" name="shipping_state" value="{{ shipping_form.shipping_state.value|default:"" }}">
-                        {% if shipping_form.shipping_state.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping state" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="id_shipping_zip" name="shipping_zip" value="{{ shipping_form.shipping_zip.value|default:"" }}">
-                        {% if shipping_form.shipping_zip.value == None %}
-                            <label class="mdl-textfield__label" for="card_id">{% trans "Enter your shipping zip" %}</label>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col cell_con">
-                    <i class="material-icons">place</i>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select id="id_shipping_country" name="shipping_country">
-                    <option value=""> ---- </option>
-                    {% for a,b in shipping_form.fields.shipping_country.choices %}
-                        <option value="{{ a }}"> {{ b }}</option>
                     {% endfor %}
-                    </select>
-                    {% if shipping_form.shipping_country.value == None %}
-                        <label class="mdl-textfield__label" for="shipping_country">{% trans "Enter your shipping country" %}</label>
-                    {% endif %}
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col  login-btn-con">
                     <input type="hidden" name="payment" value="true">
                     <button class="btn btn-primary btn-lg">{% trans "Continue" %}</button>
-                </div>
                 </form>
             </div>
         </div>

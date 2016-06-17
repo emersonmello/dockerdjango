@@ -28,13 +28,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
-
-    <!-- django material -->
-    {% include 'material/includes/material_css.html' %}
-    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
-    {% include 'material/includes/material_js.html' %}
-    <!-- end django material -->
-
     <style>
         #view-source {
           position: fixed;
@@ -173,9 +166,9 @@
 
 
     {% endblock footer %}
-    </div> <!-- end div class="mdl-layout mdl-js-layout mdl-layout--fixed-header -->
+    </div> <!-- end div class="mdl-layout mdl-js-layout mdl-layout -->
     <script src="{% static "material.min.js" %}"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/media/js/custom.js"></script>
 </body>
 </html>

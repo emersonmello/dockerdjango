@@ -7,9 +7,16 @@ from django.utils.translation import ugettext as _
 
 from basket.basket_utils import get_current_basket
 
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 def view_basket(request):
-    basket = get_current_basket(request)
+    try:
+        basket = get_current_basket(request)
+    except Exception as e:
+        logger.error('%s (%s)' % (e.message, type(e)))
     return render(request, "view_basket.html", {
         'basket_items': basket.get_basket_items(),
         'basket': basket
