@@ -29,8 +29,10 @@ class Basket(models.Model):
 
     def size(self):
         """Returns number of items in basket"""
-
-        return len(self.get_basket_items())
+        size = 0
+        for item in self.basketitem_set.all():
+            size += item.quantity
+        return size
 
     def calculate_basket(self):
         """Calculates all basket contents"""
