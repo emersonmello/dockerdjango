@@ -16,7 +16,7 @@ def home(request):
     except Exception as e:
         logger.error('%s (%s)' % (e.message, type(e)))
         products = []
-        basket = []
+        basket = None
     return render(request, "base.html", {
         'products': products,
         'basket': basket

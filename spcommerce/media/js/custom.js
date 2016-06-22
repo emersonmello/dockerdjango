@@ -14,6 +14,7 @@ $("document").ready(function(){
                 }
             },
             success: function (data) {
+                $('a.basket_size').text(data.data)
             },
             error: function (error) {
             }

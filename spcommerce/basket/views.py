@@ -30,7 +30,8 @@ def add_to_basket(request, product_pk, quantity=1):
     basket.create_or_update_basket_item(product_pk, quantity)
 
     response_data = {
-        'success': _('Item successfully added')
+        'success': _('Item successfully added'),
+        'data': _('Your Basket (%s)' % basket.size())
     }
 
     return HttpResponse(json.dumps(response_data),
