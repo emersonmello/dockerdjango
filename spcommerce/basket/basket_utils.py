@@ -9,7 +9,11 @@ def retrieve_basket(request):
                 session = request.session['anon_basket_id']
             else:
                 session = built_session(request)
-            basket =  Basket.objects.get(session=session, active=True)
+            try:
+                basket =  Basket.objects.get(session=session, active=True)
+            except Basket.MultipleObjectsReturned:
+                 basket =  Basket.objects.filter(session=session,
+                    active=True).order_by('-id')[0]
     else:
         session = built_session(request)
         basket = Basket.objects.create(session=session, active=True)
