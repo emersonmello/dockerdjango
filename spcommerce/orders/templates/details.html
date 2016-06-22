@@ -1,16 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% block extra_header %}
+<style>
+    h4{
+        text-align:center;
+    }
+</style>
+{% endblock extra_header %}
 {% block content %}
-    <div class="android-more-section">
-        <div class="android-card-container mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
-                    <h4 class="mdl-card__title-text">{% trans "Your order is complete! Check your order number below" %}</h4>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    <span class="mdl-typography--font-light mdl-typography--subhead">{{ order.order_id }}</span>
+<div class="android-more-section">
+    <div class="android-card-container mdl-grid">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{% trans "Order completed" %}</div>
+                <div class="panel-body">
+                    {% trans "Your order is complete! Below is your order number." %}
+                    <h4><strong>{{ order.order_id }}</strong></h4>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock content %}

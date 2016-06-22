@@ -5,32 +5,30 @@
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 {% endblock extra_header %}
 {% block content %}
-    <div class="android-more-section">
-        <div class="android-card-container mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
-                    <h4 class="mdl-card__title-text">{% trans "My Account" %}</h4>
-                </div>
-                <div class="mdl-card__supporting-text">
-                <div class="container">
-                <ul class="list-inline">
-                    <li><label>{% trans "Name" %}: {{ profile }}</label></li>
-                    <li><label>{% trans "E-mail" %}: {{ profile.user.email }}</label></li>
-                    <li><label>{% trans "Shipping Address:" %}</label></li>
-                </ul>
-                <ul>
-                    <li><label>{% trans "Last order:" %}{{ profile.last_order.order_id }}</label></li>
-                    <li><label>{% trans "Last order details:" %}</label>
-                        <ul class="list-inline"><li>{{ profile.last_order.basket.total }}</li>
-                            {% for item in profile.last_order.basket.basketitem_set.all %}
-                               <li> {{ item.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
-                </div>
+<div class="android-more-section">
+    <div class="android-card-container mdl-grid">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{% trans "My Account" %}</div>
+                <div class="panel-body">
+                    <ul class="list">
+                        <li><label>{% trans "Name" %}: {{ profile }}</label></li>
+                        <li><label>{% trans "E-mail" %}: {{ profile.user.email }}</label></li>
+                        <li><label>{% trans "Shipping Address:" %}</label></li>
+                    </ul>
+                    <ul>
+                        <li><label>{% trans "Last order:" %}{{ profile.last_order.order_id }}</label></li>
+                        <li><label>{% trans "Last order details:" %}</label>
+                            <ul class="list-inline"><li>{{ profile.last_order.basket.total }}</li>
+                                {% for item in profile.last_order.basket.basketitem_set.all %}
+                                   <li> {{ item.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div> <!-- end android-card-container -->
-    </div><!-- end android-more-section -->
+        </div>
+    </div> <!-- end android-card-container -->
+</div><!-- end android-more-section -->
 {% endblock %}

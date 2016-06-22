@@ -5,12 +5,13 @@
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 {% endblock extra_header %}
 {% block content %}
-  <div class="android-more-section">
-	 <div class="android-card-container mdl-grid">
-		<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-            <div class="container">
-                <h4>{% trans "Sign up for an account" %}</h4>
+<div class="android-more-section">
+    <div class="android-card-container mdl-grid">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{% trans "Sign up for an account" %}</div>
                 <form method="POST" class="form-horizontal">
+                <div class="panel-body">
                 {% csrf_token %}
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">{% trans "Username" %}{% if form.fields.username.required %} *{% endif %}</label>
@@ -46,10 +47,10 @@
                     </div>
                 </div>
                 </form>
- 				   <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url "login" %}">
-                    	{% trans "Have an account already? Click here" %}
-                    <i class="material-icons">chevron_right</i>
-
+                </div>
+ 				<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url "login" %}">
+                	{% trans "Have an account already? Click here" %}
+                <i class="material-icons">chevron_right</i>
             </div>
 		</div> <!-- end mdl-cell -->
 	</div><!-- end android-card-container mdl-grid-->
