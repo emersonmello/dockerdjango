@@ -1,4 +1,4 @@
-Django==1.9.6
+Django==1.11.21
 django-countries
 Pillow==3.2.0
 psycopg2==2.6.1
