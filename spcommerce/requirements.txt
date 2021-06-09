@@ -1,6 +1,6 @@
 Django==2.2.20
 django-countries
-Pillow==8.1.1
+Pillow==8.2.0
 psycopg2==2.6.1
 requests==2.20.0
 uwsgi
